@@ -1,13 +1,13 @@
 const express = require('express');
 
-const routes = express.Router(); //nos permite hacer el ruteo, decir el recorrido al recibir una peticion
-
-// routes.get('/',);
+//nos permite hacer el ruteo, decir el recorrido que tiene que hacer al recibir una peticion
+const routes = express.Router(); 
 
 const {
     renderHome,
     getAllProducts,
-    getForm
+    getForm,
+    addNewProduct
 } = require('../controllers/tiendaControllers');
 
 routes.get('/', renderHome);
@@ -15,5 +15,7 @@ routes.get('/', renderHome);
 routes.get('/productos', getAllProducts);
 
 routes.get('/nuevoProducto', getForm);
+
+routes.post('/nuevoProducto', addNewProduct);
 
 module.exports = routes;

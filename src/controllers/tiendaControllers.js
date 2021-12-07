@@ -20,7 +20,9 @@ const getAllProducts = (req, res)=>{
         if(error){
             console.log(error);
         }else{
-            res.render('pages/productos', {data});
+            res.render('pages/productos', {
+                data
+            });
         }
     });
 };
@@ -28,13 +30,23 @@ const getAllProducts = (req, res)=>{
 const getForm = (req, res)=>{
     res.render('pages/formulario')
 };
-// const addNewProduct = (req, res)=>{
-//     const {producto, categoria, }= req.body{
-//         databaseConnection.qu
-//     }
-// }
+
+const addNewProduct = (req, res)=>{
+    const {producto,categoria,descripcion,precio}= req.body;
+
+    databaseConnection.query('INSERT INTO productos(producto,categoria,imagen,descripcion,precio) VALUES(?,?,"/imagenes/estilo-madera.png",?,?)',[producto,categoria,descripcion,parseInt(precio)], (error, data)=>{
+        if(error){
+            console.log(error);
+        }else{ 
+            res.redirect('/productos');
+        }
+    });
+}
+
+
 module.exports = {
     renderHome,
     getAllProducts,
-    getForm
+    getForm,
+    addNewProduct
 };
